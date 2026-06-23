@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Instrument+Serif:ital@0;1&family=Outfit:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap');
+
+:root {
+    /* DEFAULT LIGHT SYSTEM THEME */
+    --primary: #2563EB;
+    /* Royal Blue */
+    --primary-dark: #1D4ED8;
+    --secondary: #06B6D4;
+    /* Cyan */
+    --accent: #F97316;
+    /* Orange */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --text-heading: #0F172A;
+    --text-body: #475569;
+    --border: #E2E8F0;
+
+    --font-heading: 'Space Grotesk', 'Outfit', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-mono: 'DM Mono', monospace;
+
+    /* Global button border radius */
+    --btn-border-radius: 4px;
+    /* Industrial geometric feel */
+
+    /* Premium UI variables */
+    --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04), 0 1px 2px 0 rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
+}
+
+.dark {
+    /* PREMIUM DARK SYSTEM THEME */
+    --bg-primary: #09090B;
+    --bg-secondary: #0e0e12;
+    --text-heading: #F8FAFC;
+    --text-body: #94A3B8;
+    --border: #1E293B;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: auto; /* Required for Lenis smooth scroll */
+  }
+  
+  body {
+    @apply transition-colors duration-300 bg-[var(--bg-primary)] text-[var(--text-body)] font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Outfit', sans-serif;
+    @apply text-[var(--text-heading)] font-bold;
+  }
+}
+
+/* Custom Lenis Smooth Scroll Recommended styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Mouse Glow Styles */
+.glow-card {
+  position: relative;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(139, 92, 246, 0.25),
+    transparent 40%
+  );
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+.glow-card-inner {
+  position: relative;
+  z-index: 10;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#fafafa] dark:bg-[#09090b];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-300 dark:bg-neutral-800 rounded-full border-2 border-solid border-[#fafafa] dark:border-[#09090b];
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-400 dark:bg-neutral-700;
+}
+
+/* Gradix loader animations */
+@keyframes gradix-spin-pulse {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.06); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.gradix-loader-svg {
+  width: 106px; /* size similar to original template */
+  height: 106px;
+  display: block;
+  transform-origin: 50% 50%;
+  animation: gradix-spin-pulse 1.9s cubic-bezier(.2,.9,.2,1) infinite;
+}
+
+.gradix-loader-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
