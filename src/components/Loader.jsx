@@ -34,7 +34,7 @@ export default function Loader({ onComplete }) {
           ease: [0.76, 0, 0.24, 1],
         },
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-darkBg text-white select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#09090b] text-white select-none"
     >
       <div className="flex flex-col items-center justify-center w-full max-w-3xl px-8">
 
