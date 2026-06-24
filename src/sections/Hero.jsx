@@ -82,7 +82,7 @@ export default function Hero() {
     },
     {
       tokens: [
-        { text: "Gradix Technologies", gradient: false }
+        { text: "GRADIX TECHNOLOGIES", gradient: false }
       ],
       highlight: true
     }
@@ -96,7 +96,7 @@ export default function Hero() {
     >
 
       {/* Premium Cyber Grid Background */}
-      <div 
+      <div
         ref={gridRef}
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none"
       >
@@ -121,25 +121,24 @@ export default function Hero() {
               <Fragment key={i}>
                 {i > 0 && <div className="basis-full h-0" />}
                 <span className="inline-block overflow-hidden py-1">
-                  <span 
-                    className={`hero-title-word inline-block translate-y-[110%] opacity-0 ${
-                      line.highlight 
-                        ? 'bg-gradient-to-r from-primary-600 via-cyan-500 to-primary-600 animate-gradient-shift text-white px-5 py-1.5 rounded-[1.25rem] shadow-md border border-primary-500/10 dark:border-primary-500/20 select-none' 
-                        : ''
-                    }`}
+                  <span
+                    className={`hero-title-word inline-block translate-y-[110%] opacity-0 ${line.highlight
+                      ? 'highlighter-marker-bg text-neutral-950 dark:text-neutral-950 px-6 py-1.5 select-none cursor-default'
+                      : i === 0 ? 'relative' : ''
+                      }`}
                   >
                     {line.tokens.map((token, tIdx) => (
                       <span
                         key={tIdx}
-                        className={`${
-                          token.gradient && !line.highlight
-                            ? 'bg-gradient-to-r from-primary-600 via-primary-500 to-cyan-400 bg-clip-text text-transparent inline-block' 
-                            : 'inline-block'
-                        } ${tIdx > 0 ? 'ml-[0.25em]' : ''}`}
+                        className={`${token.gradient && !line.highlight
+                          ? 'bg-gradient-to-r from-primary-600 via-primary-500 to-cyan-400 bg-clip-text text-transparent inline-block'
+                          : 'inline-block'
+                          } ${tIdx > 0 ? 'ml-[0.25em]' : ''}`}
                       >
                         {token.text}
                       </span>
                     ))}
+
                   </span>
                 </span>
               </Fragment>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
+import { FaFemale, FaMale } from 'react-icons/fa';
 import Magnetic from '../components/Magnetic';
 
 const reviews = [
@@ -8,19 +9,19 @@ const reviews = [
     quote: "What we expected was great, but Gradix delivered even better. Their solutions exceeded our expectations and truly made a difference.",
     author: "Ms Prithika Sri",
     role: "Director, Nexyuga Innovations",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    gender: "female"
   },
   {
     quote: "Working with the team exceeded our expectations. Our software performs flawlessly, boosts productivity, ensures efficiency, and makes daily operations effortless.",
     author: "Mr Vishnu",
     role: "Xiaomi Retails",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    gender: "male"
   },
   {
     quote: "The development process was smooth and professional. Our custom software now drives growth, improves workflow, simplifies tasks, and delivers real impact.",
     author: "Mr Pradeep",
     role: "Forever Finds",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    gender: "male"
   }
 ];
 
@@ -79,7 +80,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24 px-6 md:px-8 bg-transparent">
       <div className="mx-auto max-w-5xl">
-        
+
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary-600 dark:text-primary-400">
@@ -92,8 +93,8 @@ export default function Testimonials() {
 
         {/* Testimonials Slider Card */}
         <div className="relative rounded-3xl border border-neutral-200/50 dark:border-neutral-800/50 bg-white/40 dark:bg-neutral-900/35 backdrop-blur-md p-8 sm:p-12 md:p-16 overflow-hidden min-h-[380px] sm:min-h-[320px] flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
-          
-          <div 
+
+          <div
             className="relative overflow-hidden flex-grow"
             onMouseEnter={() => { if (timerRef.current) clearInterval(timerRef.current); }}
             onMouseLeave={resetTimer}
@@ -116,11 +117,15 @@ export default function Testimonials() {
 
                 {/* Profile Meta */}
                 <div className="flex items-center gap-4 mt-8">
-                  <img
-                    src={reviews[index].avatar}
-                    alt={reviews[index].author}
-                    className="h-12 w-12 rounded-full object-cover border border-neutral-200/50 dark:border-neutral-850"
-                  />
+                  {reviews[index].gender === 'female' ? (
+                    <div className="h-12 w-12 rounded-full flex items-center justify-center bg-gradient-to-tr from-pink-500 via-purple-500 to-indigo-500 text-white shadow-md border border-pink-400/20 shrink-0">
+                      <FaFemale className="h-6.5 w-6.5" />
+                    </div>
+                  ) : (
+                    <div className="h-12 w-12 rounded-full flex items-center justify-center bg-gradient-to-tr from-blue-500 via-cyan-500 to-primary-500 text-white shadow-md border border-blue-400/20 shrink-0">
+                      <FaMale className="h-6.5 w-6.5" />
+                    </div>
+                  )}
                   <div>
                     <h4 className="text-sm font-bold text-neutral-900 dark:text-white">
                       {reviews[index].author}
@@ -146,9 +151,8 @@ export default function Testimonials() {
                     setIndex(dotIdx);
                     resetTimer();
                   }}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    index === dotIdx ? 'w-6 bg-primary-500' : 'w-1.5 bg-neutral-300 dark:bg-neutral-700'
-                  }`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${index === dotIdx ? 'w-6 bg-primary-500' : 'w-1.5 bg-neutral-300 dark:bg-neutral-700'
+                    }`}
                   aria-label={`Go to slide ${dotIdx + 1}`}
                 />
               ))}
