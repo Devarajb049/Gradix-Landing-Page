@@ -39,7 +39,7 @@ export default function SpringModal({ isOpen, setIsOpen }) {
             {/* Background Icon */}
             <HiOutlineMail className="text-white/5 rotate-12 text-[300px] absolute z-0 -top-20 -left-20 pointer-events-none" />
 
-            <button 
+            <button
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
             >
@@ -58,8 +58,8 @@ export default function SpringModal({ isOpen, setIsOpen }) {
                     <div className="bg-white/10 w-16 h-16 mb-4 rounded-full text-3xl text-white grid place-items-center mx-auto backdrop-blur-sm">
                       <HiOutlineMail className="h-8 w-8" />
                     </div>
-                    <h3 className="text-2xl font-bold text-center mb-1">
-                      Let's Create Together
+                    <h3 className="text-2xl font-bold text-center mb-1 !text-white">
+                      Let's Create With Us
                     </h3>
                     <p className="text-center text-white/80 text-sm mb-6 max-w-sm mx-auto">
                       Drop us a line and our expert product architects will get back to you within 24 hours.
@@ -105,14 +105,15 @@ export default function SpringModal({ isOpen, setIsOpen }) {
                           placeholder="Tell us about your project goals..."
                         />
                       </div>
-                      
+
                       <div className="pt-2">
-                        <button
+                        <RoundedSlideButton
                           type="submit"
-                          className="w-full flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-primary-700 hover:bg-neutral-100 transition-colors shadow-lg"
+                          variant="white"
+                          className="w-full py-3 shadow-lg justify-center flex text-neutral-900"
                         >
                           Send Message
-                        </button>
+                        </RoundedSlideButton>
                       </div>
                     </form>
                   </motion.div>
@@ -132,7 +133,7 @@ export default function SpringModal({ isOpen, setIsOpen }) {
                     >
                       <FiCheckCircle className="h-10 w-10 text-primary-600" />
                     </motion.div>
-                    <h3 className="text-3xl font-bold mb-2">Message Sent!</h3>
+                    <h3 className="text-3xl font-bold mb-2 !text-white">Message Sent!</h3>
                     <p className="text-white/80 max-w-xs mx-auto text-sm">
                       Thank you, {formData.name}. Our team will connect with you shortly.
                     </p>

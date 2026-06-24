@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiArrowRight } from 'react-icons/hi';
 import GlowContainer from '../components/GlowContainer';
 
-import project1 from '../assets/Project (1).png';
-import project2 from '../assets/Project (2).png';
-import project3 from '../assets/Project (3).png';
+import project1 from '../assets/Project1.png';
+import project2 from '../assets/Project2.png';
+import project3 from '../assets/Project3.png';
 
 const categories = ['All', 'Design', 'Development'];
 
@@ -16,7 +16,8 @@ const projects = [
     category: 'Development',
     tags: ['Web Application', 'MVP Development', 'React'],
     image: project2,
-    description: 'Custom software application portal built for Nexyuga Innovations to optimize internal project delivery pipelines and client interfaces.'
+    description: 'Custom software application portal built for Nexyuga Innovations to optimize internal project delivery pipelines and client interfaces.',
+    url: 'https://nexyuga.in/'
   },
   {
     id: 2,
@@ -24,7 +25,8 @@ const projects = [
     category: 'Development',
     tags: ['SaaS Dashboard', 'Inventory Control', 'NodeJS'],
     image: project3,
-    description: 'An enterprise sales and stock tracker software developed for Sri Vishnu Communications (Xiaomi Retails) boosting internal operations efficiency.'
+    description: 'An enterprise sales and stock tracker software developed for Sri Vishnu Communications (Xiaomi Retails) boosting internal operations efficiency.',
+    url: 'https://www.srivishnucommunications.com/'
   },
   {
     id: 3,
@@ -32,7 +34,8 @@ const projects = [
     category: 'Design',
     tags: ['E-Commerce', 'UX/UI Design', 'Shopify Integration'],
     image: project1,
-    description: 'Custom electronic marketplace solution and layout structure optimized for Forever Finds to simplify order workflows and drive growth.'
+    description: 'Custom electronic marketplace solution and layout structure optimized for Forever Finds to simplify order workflows and drive growth.',
+    url: 'https://forever-find.netlify.app/'
   }
 ];
 
@@ -138,10 +141,14 @@ export default function Projects() {
                     </p>
 
                     {/* Action Arrow */}
-                    <div className="flex items-center text-xs font-bold uppercase tracking-widest text-primary-500 dark:text-primary-400 group-hover:text-cyan-400 transition-colors gap-2 cursor-pointer mt-auto">
-                      Explore Case Study
-                      <HiArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </div>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-xs font-bold uppercase tracking-widest text-primary-500 dark:text-primary-400 group-hover:text-cyan-400 transition-colors gap-2 cursor-pointer mt-auto"
+                    >
+                      Visit Project <HiArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
                   </div>
                 </GlowContainer>
               </motion.div>

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, Fragment } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { motion } from 'framer-motion';
@@ -13,8 +13,7 @@ export default function Hero() {
   const containerRef = useRef(null);
   const headingRef = useRef(null);
   const subHeadingRef = useRef(null);
-  const inputRef = useRef(null);
-  const browserRef = useRef(null);
+  const gridRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState('Welcome');
   const [emailText, setEmailText] = useState('');
@@ -23,27 +22,24 @@ export default function Hero() {
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
+    // Grid entrance
     tl.fromTo(
-      headingRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 }
+      gridRef.current,
+      { opacity: 0, scale: 0.95 },
+      { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }
+    );
+
+    // Staggered word animation
+    tl.fromTo(
+      '.hero-title-word',
+      { y: '110%', opacity: 0 },
+      { y: '0%', opacity: 1, duration: 0.9, stagger: 0.08, ease: 'power3.out' },
+      '-=1.2'
     )
       .fromTo(
         subHeadingRef.current,
-        { y: 30, opacity: 0 },
+        { y: 25, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8 },
-        '-=0.7'
-      )
-      .fromTo(
-        inputRef.current,
-        { scale: 0.95, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6 },
-        '-=0.5'
-      )
-      .fromTo(
-        browserRef.current,
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
         '-=0.6'
       );
   }, { scope: containerRef });
@@ -70,6 +66,28 @@ export default function Hero() {
     }
   };
 
+  const titleLines = [
+    {
+      tokens: [
+        { text: "Accelerate", gradient: true },
+        { text: "Your Business", gradient: false }
+      ],
+      highlight: false
+    },
+    {
+      tokens: [
+        { text: "Growth with", gradient: false }
+      ],
+      highlight: false
+    },
+    {
+      tokens: [
+        { text: "Gradix Technologies", gradient: false }
+      ],
+      highlight: true
+    }
+  ];
+
   return (
     <section
       id="home"
@@ -78,7 +96,10 @@ export default function Hero() {
     >
 
       {/* Premium Cyber Grid Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+      <div 
+        ref={gridRef}
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none"
+      >
         {/* Glow Spheres */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 h-[350px] w-[600px] rounded-full bg-primary-500/10 dark:bg-primary-500/15 blur-[120px] animate-pulse-slow" />
         <div className="absolute top-1/3 left-1/4 h-[300px] w-[300px] rounded-full bg-cyan-400/5 dark:bg-cyan-400/10 blur-[100px] animate-pulse-slow" />
@@ -94,14 +115,35 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-6xl w-full text-center flex flex-col items-center">
         {/* Main Central Heading */}
-        <div ref={headingRef} className="overflow-hidden">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-neutral-900 dark:text-white max-w-4xl">
-            <span className="bg-gradient-to-r from-primary-600 via-primary-500 to-cyan-400 bg-clip-text text-transparent">
-              Accelerate
-            </span>{' '}Your Business Growth with{' '}
-            <span className="bg-gradient-to-r from-primary-600 via-primary-500 to-cyan-400 bg-clip-text text-transparent">
-              Gradix Technologies
-            </span>
+        <div ref={headingRef} className="max-w-4xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-black tracking-tight leading-[1.28] text-neutral-900 dark:text-white flex flex-wrap justify-center gap-x-[0.22em] gap-y-2 sm:gap-y-3">
+            {titleLines.map((line, i) => (
+              <Fragment key={i}>
+                {i > 0 && <div className="basis-full h-0" />}
+                <span className="inline-block overflow-hidden py-1">
+                  <span 
+                    className={`hero-title-word inline-block translate-y-[110%] opacity-0 ${
+                      line.highlight 
+                        ? 'bg-gradient-to-r from-primary-600 via-cyan-500 to-primary-600 animate-gradient-shift text-white px-5 py-1.5 rounded-[1.25rem] shadow-md border border-primary-500/10 dark:border-primary-500/20 select-none' 
+                        : ''
+                    }`}
+                  >
+                    {line.tokens.map((token, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className={`${
+                          token.gradient && !line.highlight
+                            ? 'bg-gradient-to-r from-primary-600 via-primary-500 to-cyan-400 bg-clip-text text-transparent inline-block' 
+                            : 'inline-block'
+                        } ${tIdx > 0 ? 'ml-[0.25em]' : ''}`}
+                      >
+                        {token.text}
+                      </span>
+                    ))}
+                  </span>
+                </span>
+              </Fragment>
+            ))}
           </h1>
         </div>
 
@@ -118,7 +160,7 @@ export default function Hero() {
           <a
             href="#contact"
             onClick={(e) => handleAnchorClick(e, '#contact')}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-[var(--btn-border-radius)] bg-primary-500 hover:bg-primary-600 text-white text-sm font-bold uppercase tracking-widest shadow-lg shadow-primary-500/25 transition-all duration-200 hover:-translate-y-0.5"
+            className="hero-cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-[var(--btn-border-radius)] bg-primary-500 hover:bg-primary-600 text-white text-sm font-bold uppercase tracking-widest shadow-lg shadow-primary-500/25 transition-all duration-200 hover:-translate-y-0.5"
           >
             Get in Touch
             <HiOutlineChevronRight className="h-4 w-4" />
@@ -126,7 +168,7 @@ export default function Hero() {
           <a
             href="#services"
             onClick={(e) => handleAnchorClick(e, '#services')}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-[var(--btn-border-radius)] border border-neutral-300 dark:border-neutral-700 text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-300 hover:border-primary-500 hover:text-primary-500 dark:hover:text-primary-400 dark:hover:border-primary-500 transition-all duration-200 hover:-translate-y-0.5"
+            className="hero-cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-[var(--btn-border-radius)] border border-neutral-300 dark:border-neutral-700 text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-300 hover:border-primary-500 hover:text-primary-500 dark:hover:text-primary-400 dark:hover:border-primary-500 transition-all duration-200 hover:-translate-y-0.5"
           >
             Our Services
           </a>
